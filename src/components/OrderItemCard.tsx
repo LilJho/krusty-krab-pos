@@ -6,17 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { ItemsProps } from "./OrderSection";
 
-const OrderItemCard = () => {
+interface IOrderItemCard {
+  item: ItemsProps;
+}
+
+const OrderItemCard = ({ item }: IOrderItemCard) => {
   return (
-    <Card className="flex flex-col items-center justify-center p-2">
+    <Card
+      key={item.id}
+      className="flex flex-col items-center justify-center p-2"
+    >
       <img
-        src="./menuItems/krabbypatty.png"
-        alt="Krabby Patty"
-        className="object-cover w-[5rem] h-[5rem]"
+        src={item.img}
+        alt={item.name}
+        className="object-contain w-[5rem] h-[5rem]"
       />
-      <CardTitle>Krabby Patty</CardTitle>
+      <CardTitle>{item.name}</CardTitle>
     </Card>
   );
 };

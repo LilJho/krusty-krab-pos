@@ -7,8 +7,13 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import OrderItemCard from "./OrderItemCard";
+import { ItemsProps } from "./OrderSection";
 
-const OrderMenu = () => {
+interface IOrderMenuProps {
+  items: ItemsProps[];
+}
+
+const OrderMenu = ({ items }: IOrderMenuProps) => {
   return (
     <Card className="m-4">
       <CardHeader className="text-center">
@@ -16,33 +21,9 @@ const OrderMenu = () => {
       </CardHeader>
       <CardContent>
         <ul className="grid grid-cols-3 gap-2">
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
-          <li>
-            <OrderItemCard />
-          </li>
+          {items.map((item) => (
+            <OrderItemCard item={item} />
+          ))}
         </ul>
       </CardContent>
     </Card>
