@@ -8,7 +8,7 @@ const MainSection = () => {
         <img
           src="./spongebob.png"
           alt="Spongebob"
-          className="w-[35rem] absolute bottom-0 right-[-300px]"
+          className="w-[35rem] absolute bottom-0 right-[-300px] z-0"
         />
       </div>
     </main>
