@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { ItemsProps } from "../../../components/OrderSection";
 
-const initialState: ItemsProps[] | [] = [];
+const initialState: ItemsProps[] | [{}] = [];
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState: initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<ItemsProps>) => {
-      state = [...state, action.payload];
+      state.push(action.payload);
     },
     removeFromCart: (state, action: PayloadAction<ItemsProps>) => {
       const index = state.findIndex((item) => item.id === action.payload.id);

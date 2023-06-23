@@ -1,18 +1,18 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
+import { Card, CardTitle } from "../components/ui/card";
 import { ItemsProps } from "./OrderSection";
+import { Button } from "./ui/button";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { addToCart } from "../lib/store/slice/cartSlice";
 
 interface IOrderItemCard {
   item: ItemsProps;
 }
 
 const OrderItemCard = ({ item }: IOrderItemCard) => {
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart);
+  console.log(cart);
+
   return (
     <Card
       key={item.id}
@@ -24,6 +24,13 @@ const OrderItemCard = ({ item }: IOrderItemCard) => {
         className="object-contain w-[5rem] h-[5rem]"
       />
       <CardTitle>{item.name}</CardTitle>
+      <Button
+        onClick={() => dispatch(addToCart(item))}
+        variant={"outline"}
+        size={"sm"}
+      >
+        Add to cart
+      </Button>
     </Card>
   );
 };
