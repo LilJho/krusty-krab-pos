@@ -5,14 +5,16 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { MdDeleteOutline } from "react-icons/md";
 import NodataSvg from "../assets/nodata.svg";
+import { ScrollArea } from "./ui/scroll-area";
+import { Separator } from "./ui/separator";
 
 const CartList = () => {
   const cartItems = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   return (
-    <Card>
-      <CardContent>
+    <ScrollArea className="max-h-[700px] w-full rounded-md border p-4">
+      <div>
         {cartItems.length === 0 ? (
           <Card className="mt-4">
             <CardContent className="flex flex-col items-center justify-center">
@@ -22,25 +24,28 @@ const CartList = () => {
           </Card>
         ) : (
           cartItems.map((item) => (
-            <Card className="flex items-center justify-between p-2 m-4">
-              <img
-                className="w-[4rem] h-[4rem] object-contain"
-                src={item.img}
-                alt={item.name}
-              />
-              <p>{item.name}</p>
-              <Badge>Price: 2$</Badge>
-              <Button
-                variant={"outline"}
-                onClick={() => dispatch(removeFromCart(item))}
-              >
-                <MdDeleteOutline />
-              </Button>
-            </Card>
+            <>
+              <Card className="flex items-center justify-between p-2 mt-4">
+                <img
+                  className="w-[4rem] h-[4rem] object-contain"
+                  src={item.img}
+                  alt={item.name}
+                />
+                <p>{item.name}</p>
+                <Badge>Price: 2$</Badge>
+                <Button
+                  variant={"outline"}
+                  onClick={() => dispatch(removeFromCart(item))}
+                >
+                  <MdDeleteOutline />
+                </Button>
+              </Card>
+              <Separator className="my-2" />
+            </>
           ))
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </ScrollArea>
   );
 };
 
