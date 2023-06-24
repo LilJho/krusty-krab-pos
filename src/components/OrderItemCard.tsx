@@ -1,4 +1,4 @@
-import { Card, CardTitle } from "../components/ui/card";
+import { Card, CardDescription, CardTitle } from "../components/ui/card";
 import { ItemsProps } from "./OrderSection";
 import { Button } from "./ui/button";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
@@ -16,14 +16,15 @@ const OrderItemCard = ({ item }: IOrderItemCard) => {
   return (
     <Card
       key={item.id}
-      className="flex flex-col items-center justify-center p-2"
+      className="flex flex-col items-center justify-end gap-2 px-2 py-1 text-center"
     >
       <img
         src={item.img}
         alt={item.name}
         className="object-contain w-[5rem] h-[5rem]"
       />
-      <CardTitle>{item.name}</CardTitle>
+      <CardDescription>Price: ${item.price}</CardDescription>
+      <CardTitle className="text-sm">{item.name}</CardTitle>
       <Button
         onClick={() => dispatch(addToCart(item))}
         variant={"outline"}

@@ -13,38 +13,41 @@ const CartList = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <ScrollArea className="max-h-[700px] w-full rounded-md border p-4">
-      <div>
-        {cartItems.length === 0 ? (
-          <Card className="mt-4">
-            <CardContent className="flex flex-col items-center justify-center">
-              <img src={NodataSvg} alt="No data Picture" />
-              <p>No Data Found...</p>
-            </CardContent>
-          </Card>
-        ) : (
-          cartItems.map((item) => (
-            <>
-              <Card className="flex items-center justify-between p-2 mt-4">
+    <ScrollArea className="max-h-[550px] min-h-[550px] border w-full rounded-md p-4">
+      {cartItems.length === 0 ? (
+        <Card className="mt-4">
+          <CardContent className="flex flex-col items-center justify-center">
+            <img src={NodataSvg} alt="No data Picture" />
+            <p>No Data Found...</p>
+          </CardContent>
+        </Card>
+      ) : (
+        cartItems.map((item) => (
+          <>
+            <Card className="flex items-center justify-between p-2 mt-4">
+              <div className="flex items-center justify-center gap-1">
                 <img
                   className="w-[4rem] h-[4rem] object-contain"
                   src={item.img}
                   alt={item.name}
                 />
-                <p>{item.name}</p>
-                <Badge>Price: 2$</Badge>
-                <Button
-                  variant={"outline"}
-                  onClick={() => dispatch(removeFromCart(item))}
-                >
-                  <MdDeleteOutline />
-                </Button>
-              </Card>
-              <Separator className="my-2" />
-            </>
-          ))
-        )}
-      </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-xs text-gray-500">{item.name}</p>
+                  <Badge>Price: ${item.price}</Badge>
+                </div>
+              </div>
+
+              <Button
+                variant={"outline"}
+                onClick={() => dispatch(removeFromCart(item))}
+              >
+                <MdDeleteOutline />
+              </Button>
+            </Card>
+            <Separator className="my-2" />
+          </>
+        ))
+      )}
     </ScrollArea>
   );
 };

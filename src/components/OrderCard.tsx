@@ -9,7 +9,11 @@ interface IOrderCardProps {
 const OrderCard = ({ orderCategory }: IOrderCardProps) => {
   return (
     <div className="p-4 rounded-md bg-[#AE9160] flex justify-center items-center flex-col">
-      <img src={orderCategory.img} alt="Krabby Patty" className="w-[4rem]" />
+      <img
+        src={orderCategory.img}
+        alt={orderCategory.title}
+        className="w-[4rem]"
+      />
       <p className="text-base font-medium text-white">{orderCategory.title}</p>
     </div>
   );

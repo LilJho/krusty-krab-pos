@@ -9,13 +9,14 @@ import { ItemsProps } from "./OrderSection";
 
 interface IOrderMenuProps {
   items: ItemsProps[];
+  title: string;
 }
 
-const OrderMenu = ({ items }: IOrderMenuProps) => {
+const OrderMenu = ({ items, title }: IOrderMenuProps) => {
   return (
-    <Card className="m-4">
+    <Card className="border-none">
       <CardHeader className="text-center">
-        <CardTitle>Burgers</CardTitle>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="grid grid-cols-3 gap-2">
