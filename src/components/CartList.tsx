@@ -7,8 +7,13 @@ import { MdDeleteOutline } from "react-icons/md";
 import NodataSvg from "../assets/nodata.svg";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
+import { Input } from "./ui/input";
 
-const CartList = () => {
+interface ICartListProps {
+  handleChange: (item: any, qty: number) => void;
+}
+
+const CartList = ({ handleChange }: ICartListProps) => {
   const cartItems = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -34,6 +39,16 @@ const CartList = () => {
                 <div className="flex flex-col gap-1">
                   <p className="text-xs text-gray-500">{item.name}</p>
                   <Badge>Price: ${item.price}</Badge>
+                  <span className="flex items-center justify-start gap-1 text-xs">
+                    Qty:
+                    <Input
+                      onChange={(e) =>
+                        handleChange(item, parseInt(e.target.value))
+                      }
+                      className="w-12 h-6 p-2 text-xs"
+                      type="number"
+                    />
+                  </span>
                 </div>
               </div>
 

@@ -1,7 +1,7 @@
 import { Card, CardDescription, CardTitle } from "../components/ui/card";
 import { ItemsProps } from "./OrderSection";
 import { Button } from "./ui/button";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 import { addToCart } from "../lib/store/slice/cartSlice";
 
 interface IOrderItemCard {
@@ -10,8 +10,6 @@ interface IOrderItemCard {
 
 const OrderItemCard = ({ item }: IOrderItemCard) => {
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart);
-  console.log(cart);
 
   return (
     <Card

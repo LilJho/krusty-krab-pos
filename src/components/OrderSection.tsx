@@ -55,19 +55,19 @@ const OrderSection = () => {
       img: "./ordersCategory/meals.png",
       items: [
         {
-          id: 1,
+          id: 5,
           name: "Kiddie Meal",
           img: "./menuItems/krabbymeal.jpg",
           price: 2.75,
         },
         {
-          id: 2,
+          id: 6,
           name: "Superhero Meal",
           img: "./menuItems/heromeal.jpg",
           price: 3.75,
         },
         {
-          id: 3,
+          id: 7,
           name: "Supermeal Jollibee",
           img: "./menuItems/supermealjabe.png",
           price: 5.25,
@@ -80,19 +80,19 @@ const OrderSection = () => {
       img: "./ordersCategory/snacks.png",
       items: [
         {
-          id: 1,
+          id: 8,
           name: "Coral Bits",
           img: "./menuItems/coralbits.webp",
           price: 1.5,
         },
         {
-          id: 2,
+          id: 9,
           name: "Golden Loaf",
           img: "./menuItems/goldenload.webp",
           price: 2.0,
         },
         {
-          id: 3,
+          id: 10,
           name: "Kelp Fries",
           img: "./menuItems/kelpfries.jpg",
           price: 1.25,
@@ -105,25 +105,25 @@ const OrderSection = () => {
       img: "./ordersCategory/drinks.png",
       items: [
         {
-          id: 1,
+          id: 11,
           name: "Kelp Shake",
           img: "./menuItems/kelpshake.jpg",
           price: 2.0,
         },
         {
-          id: 2,
+          id: 12,
           name: "Seafoam Soda",
           img: "./menuItems/seafoamsoda.jpg",
           price: 1.25,
         },
         {
-          id: 3,
+          id: 13,
           name: "Milkshake",
           img: "./menuItems/milkshake.webp",
           price: 2.25,
         },
         {
-          id: 4,
+          id: 14,
           name: "Krabby Kola",
           img: "./menuItems/krabbykola.webp",
           price: 1.5,
