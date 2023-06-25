@@ -13,7 +13,7 @@ const CartList = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <ScrollArea className="max-h-[550px] min-h-[550px] border w-full rounded-md p-4">
+    <ScrollArea className="h-[550px] border w-full rounded-md p-4">
       {cartItems.length === 0 ? (
         <Card className="mt-4">
           <CardContent className="flex flex-col items-center justify-center">
