@@ -19,7 +19,7 @@ const OrderItemCard = ({ item }: IOrderItemCard) => {
       <img
         src={item.img}
         alt={item.name}
-        className="object-contain w-[5rem] h-[5rem]"
+        className="object-contain w-[5rem] h-[5rem] "
       />
       <CardDescription>Price: ${item.price}</CardDescription>
       <CardTitle className="text-sm">{item.name}</CardTitle>

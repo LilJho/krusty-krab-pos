@@ -134,8 +134,8 @@ const OrderSection = () => {
   ];
 
   return (
-    <div className="w-[35rem] h-[20rem] bg-[#D7BA89] rounded-lg flex justify-center items-center">
-      <div className="grid grid-cols-2 gap-2">
+    <div className="md:w-[35rem] w-full h-full md:h-[20rem] bg-[#D7BA89] rounded-lg flex justify-center items-center">
+      <div className="grid grid-cols-2 gap-2 p-4 ">
         {ordersCategory.map((orderCategory) => (
           <Dialog key={orderCategory.id}>
             <DialogTrigger asChild>
@@ -143,7 +143,7 @@ const OrderSection = () => {
                 <OrderCard orderCategory={orderCategory} />
               </button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="mt-[8rem] md:mt-0">
               <OrderMenu
                 items={orderCategory.items}
                 title={orderCategory.title}

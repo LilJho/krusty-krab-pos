@@ -12,9 +12,9 @@ const OrderCard = ({ orderCategory }: IOrderCardProps) => {
       <img
         src={orderCategory.img}
         alt={orderCategory.title}
-        className="w-[4rem]"
+        className="md:w-[4rem] w-[8rem]"
       />
-      <p className="text-base font-medium text-white">{orderCategory.title}</p>
+      <p className="text-base font-medium text-white ">{orderCategory.title}</p>
     </div>
   );
 };

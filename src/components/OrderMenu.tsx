@@ -14,12 +14,12 @@ interface IOrderMenuProps {
 
 const OrderMenu = ({ items, title }: IOrderMenuProps) => {
   return (
-    <Card className="border-none">
+    <Card className="border-none ">
       <CardHeader className="text-center">
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="grid grid-cols-3 gap-2">
+        <ul className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {items.map((item) => (
             <OrderItemCard item={item} />
           ))}
