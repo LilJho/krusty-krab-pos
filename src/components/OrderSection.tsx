@@ -7,6 +7,7 @@ export interface ItemsProps {
   name: string;
   img: string;
   price: number;
+  qty?: number;
 }
 
 interface OrdersCategoryProps {
@@ -101,7 +102,7 @@ const OrderSection = () => {
     },
     {
       id: 4,
-      title: "Drinks ",
+      title: "Drinks",
       img: "./ordersCategory/drinks.png",
       items: [
         {

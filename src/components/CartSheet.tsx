@@ -10,24 +10,19 @@ import {
 import { Button } from "./ui/button";
 import CartList from "./CartList";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { ItemsProps } from "./OrderSection";
 
-interface ICartSheetProps {
-  cartItems: ItemsProps[];
-}
-
-interface IOrderTypes {
+export interface IOrderTypes {
   id: number;
   name: string;
   img: string;
   price: number;
-  qty: number;
+  qty?: number;
 }
 
 const CartSheet = () => {
   const [order, setOrder] = useState<IOrderTypes[]>([]);
 
-  const handleChange = (item: IOrderTypes, qty: number = 1) => {
+  const handleChange = (item: IOrderTypes, qty: number) => {
     const itemToUpdate = order.find((orderItem) => orderItem.id === item.id);
 
     if (itemToUpdate) {
@@ -65,14 +60,18 @@ const CartSheet = () => {
           <SheetTitle>Cart</SheetTitle>
         </SheetHeader>
 
-        <CartList handleChange={handleChange} />
+        <CartList
+          setOrder={setOrder}
+          order={order}
+          handleChange={handleChange}
+        />
         <SheetFooter>
           <div className="flex flex-col items-end">
             <p>
               Total: ${" "}
               {order.reduce(
                 (prevVal, currentVal) =>
-                  prevVal + currentVal.price * currentVal.qty,
+                  prevVal + currentVal.price * (currentVal.qty || 1),
                 0
               )}
             </p>

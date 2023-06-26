@@ -8,18 +8,25 @@ import NodataSvg from "../assets/nodata.svg";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
 import { Input } from "./ui/input";
+import { IOrderTypes } from "./CartSheet";
+import { useEffect } from "react";
 
 interface ICartListProps {
+  setOrder: React.Dispatch<React.SetStateAction<IOrderTypes[]>>;
+  order: IOrderTypes[];
   handleChange: (item: any, qty: number) => void;
 }
 
-const CartList = ({ handleChange }: ICartListProps) => {
+const CartList = ({ setOrder, order, handleChange }: ICartListProps) => {
   const cartItems = useAppSelector((state) => state.cart);
+  useEffect(() => {
+    setOrder(cartItems);
+  }, [cartItems]);
   const dispatch = useAppDispatch();
 
   return (
     <ScrollArea className="h-[550px] border w-full rounded-md p-4">
-      {cartItems.length === 0 ? (
+      {order.length === 0 ? (
         <Card className="mt-4">
           <CardContent className="flex flex-col items-center justify-center">
             <img src={NodataSvg} alt="No data Picture" />
@@ -27,7 +34,7 @@ const CartList = ({ handleChange }: ICartListProps) => {
           </CardContent>
         </Card>
       ) : (
-        cartItems.map((item) => (
+        order.map((item) => (
           <>
             <Card className="flex items-center justify-between p-2 mt-4">
               <div className="flex items-center justify-center gap-1">
@@ -42,9 +49,12 @@ const CartList = ({ handleChange }: ICartListProps) => {
                   <span className="flex items-center justify-start gap-1 text-xs">
                     Qty:
                     <Input
+                      min={1}
+                      required
                       onChange={(e) =>
                         handleChange(item, parseInt(e.target.value))
                       }
+                      value={item.qty}
                       className="w-12 h-6 p-2 text-xs"
                       type="number"
                     />
