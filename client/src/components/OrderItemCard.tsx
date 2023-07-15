@@ -12,10 +12,7 @@ const OrderItemCard = ({ item }: IOrderItemCard) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Card
-      key={item.id}
-      className="flex flex-col items-center justify-end gap-2 px-2 py-1 text-center"
-    >
+    <Card className="flex flex-col items-center justify-end gap-2 px-2 py-1 text-center">
       <img
         src={item.img}
         alt={item.name}

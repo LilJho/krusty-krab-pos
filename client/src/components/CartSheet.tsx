@@ -10,6 +10,8 @@ import {
 import { Button } from "./ui/button";
 import CartList from "./CartList";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 export interface IOrderTypes {
   id: number;
@@ -19,10 +21,20 @@ export interface IOrderTypes {
   qty?: number;
 }
 
-const CartSheet = () => {
-  const [order, setOrder] = useState<IOrderTypes[]>([]);
+interface IPersonOrderTypes {
+  name: string;
+  order: IOrderTypes[];
+}
 
-  const handleChange = (item: IOrderTypes, qty: number) => {
+const CartSheet = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [order, setOrder] = useState<IOrderTypes[]>([]);
+  const [personOrder, setPersonOrder] = useState<IPersonOrderTypes>({
+    name: "",
+    order: [],
+  });
+
+  const handleChangeQty = (item: IOrderTypes, qty: number) => {
     const itemToUpdate = order.find((orderItem) => orderItem.id === item.id);
 
     if (itemToUpdate) {
@@ -38,10 +50,31 @@ const CartSheet = () => {
     } else {
       setOrder((prev) => [...prev, item]);
     }
+    setPersonOrder((prevState) => ({ ...prevState, order: order }));
   };
 
-  const handleSubmit = () => {
-    console.log(order);
+  const handleSubmit = async () => {
+    if (order.length > 0) {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:8080/orderData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(personOrder),
+        });
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        alert(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert("Choose your favourite dishes");
+    }
   };
 
   return (
@@ -63,10 +96,30 @@ const CartSheet = () => {
         <CartList
           setOrder={setOrder}
           order={order}
-          handleChange={handleChange}
+          handleChangeQty={handleChangeQty}
         />
         <SheetFooter>
           <div className="flex flex-col items-end">
+            <div>
+              <Label>Your Name</Label>
+              <Input
+                type="text"
+                required
+                name="order"
+                value={personOrder.name}
+                onChange={(e) => {
+                  setPersonOrder((prevObj) => ({
+                    ...prevObj,
+                    name: e.target.value,
+                  }));
+                  setPersonOrder((prevState) => ({
+                    ...prevState,
+                    order: order,
+                  }));
+                }}
+              />
+            </div>
+
             <p>
               Total: ${" "}
               {order.reduce(
@@ -76,7 +129,7 @@ const CartSheet = () => {
               )}
             </p>
             <Button onClick={handleSubmit} className="w-full mt-2">
-              Proceed to Checkout
+              {loading ? "Loading..." : "Proceed to Checkout"}
             </Button>
           </div>
         </SheetFooter>

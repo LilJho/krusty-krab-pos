@@ -21,7 +21,9 @@ const OrderMenu = ({ items, title }: IOrderMenuProps) => {
       <CardContent>
         <ul className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {items.map((item) => (
-            <OrderItemCard item={item} />
+            <li key={item.id}>
+              <OrderItemCard item={item} />
+            </li>
           ))}
         </ul>
       </CardContent>

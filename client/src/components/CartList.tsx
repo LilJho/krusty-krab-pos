@@ -14,10 +14,10 @@ import { useEffect } from "react";
 interface ICartListProps {
   setOrder: React.Dispatch<React.SetStateAction<IOrderTypes[]>>;
   order: IOrderTypes[];
-  handleChange: (item: any, qty: number) => void;
+  handleChangeQty: (item: any, qty: number) => void;
 }
 
-const CartList = ({ setOrder, order, handleChange }: ICartListProps) => {
+const CartList = ({ setOrder, order, handleChangeQty }: ICartListProps) => {
   const cartItems = useAppSelector((state) => state.cart);
   useEffect(() => {
     setOrder(cartItems);
@@ -34,44 +34,46 @@ const CartList = ({ setOrder, order, handleChange }: ICartListProps) => {
           </CardContent>
         </Card>
       ) : (
-        order.map((item) => (
-          <>
-            <Card className="flex items-center justify-between p-2 mt-4">
-              <div className="flex items-center justify-center gap-1">
-                <img
-                  className="w-[4rem] h-[4rem] object-contain"
-                  src={item.img}
-                  alt={item.name}
-                />
-                <div className="flex flex-col gap-1">
-                  <p className="text-xs text-gray-500">{item.name}</p>
-                  <Badge>Price: ${item.price}</Badge>
-                  <span className="flex items-center justify-start gap-1 text-xs">
-                    Qty:
-                    <Input
-                      min={1}
-                      required
-                      onChange={(e) =>
-                        handleChange(item, parseInt(e.target.value))
-                      }
-                      value={item.qty}
-                      className="w-12 h-6 p-2 text-xs"
-                      type="number"
-                    />
-                  </span>
+        <ul>
+          {order.map((item) => (
+            <li key={item.name}>
+              <Card className="flex items-center justify-between p-2 mt-4">
+                <div className="flex items-center justify-center gap-1">
+                  <img
+                    className="w-[4rem] h-[4rem] object-contain"
+                    src={item.img}
+                    alt={item.name}
+                  />
+                  <div className="flex flex-col gap-1">
+                    <p className="text-xs text-gray-500">{item.name}</p>
+                    <Badge>Price: ${item.price}</Badge>
+                    <span className="flex items-center justify-start gap-1 text-xs">
+                      Qty:
+                      <Input
+                        min={1}
+                        required
+                        onChange={(e) =>
+                          handleChangeQty(item, parseInt(e.target.value))
+                        }
+                        value={item.qty}
+                        className="w-12 h-6 p-2 text-xs"
+                        type="number"
+                      />
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <Button
-                variant={"outline"}
-                onClick={() => dispatch(removeFromCart(item))}
-              >
-                <MdDeleteOutline />
-              </Button>
-            </Card>
-            <Separator className="my-2" />
-          </>
-        ))
+                <Button
+                  variant={"outline"}
+                  onClick={() => dispatch(removeFromCart(item))}
+                >
+                  <MdDeleteOutline />
+                </Button>
+              </Card>
+              <Separator className="my-2" />
+            </li>
+          ))}
+        </ul>
       )}
     </ScrollArea>
   );
