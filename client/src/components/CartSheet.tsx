@@ -6,6 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetFooter,
+  SheetClose,
 } from "./ui/sheet";
 import { Button } from "./ui/button";
 import CartList from "./CartList";
@@ -33,6 +34,7 @@ const CartSheet = () => {
     name: "",
     order: [],
   });
+  const [toogle, setToogle] = useState<boolean>(false);
 
   const handleChangeQty = (item: IOrderTypes, qty: number) => {
     const itemToUpdate = order.find((orderItem) => orderItem.id === item.id);
@@ -54,7 +56,7 @@ const CartSheet = () => {
   };
 
   const handleSubmit = async () => {
-    if (order.length > 0) {
+    if (personOrder.order.length > 0 && personOrder.name !== "") {
       try {
         setLoading(true);
         const response = await fetch("http://localhost:8080/orderData", {
@@ -71,23 +73,28 @@ const CartSheet = () => {
         alert(error);
       } finally {
         setLoading(false);
+        setOrder([]);
+        setPersonOrder({ name: "", order: [] });
+        setTimeout(() => {
+          setToogle(!toogle);
+        }, 2000);
       }
     } else {
-      alert("Choose your favourite dishes");
+      alert("Choose your favourite dishes and please provide your name!");
     }
   };
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant={"outline"}
-          size={"sm"}
-          className="text-[1.5rem] text-center"
-        >
-          <AiOutlineShoppingCart />
-        </Button>
-      </SheetTrigger>
+    <Sheet open={toogle} onOpenChange={setToogle}>
+      <Button
+        variant={"outline"}
+        size={"sm"}
+        className="text-[1.5rem] text-center"
+        onClick={() => setToogle(!toogle)}
+      >
+        <AiOutlineShoppingCart />
+      </Button>
+
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Cart</SheetTitle>
@@ -128,6 +135,7 @@ const CartSheet = () => {
                 0
               )}
             </p>
+
             <Button onClick={handleSubmit} className="w-full mt-2">
               {loading ? "Loading..." : "Proceed to Checkout"}
             </Button>
