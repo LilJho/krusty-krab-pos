@@ -1,14 +1,15 @@
-import Footer from "./components/Footer";
-import MainSection from "./components/MainSection";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <MainSection />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Homepage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

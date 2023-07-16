@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
   Sheet,
-  SheetTrigger,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetFooter,
-  SheetClose,
 } from "./ui/sheet";
 import { Button } from "./ui/button";
 import CartList from "./CartList";
