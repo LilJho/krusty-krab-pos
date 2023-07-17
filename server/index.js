@@ -4,6 +4,8 @@ import cors from "cors";
 
 import connectDB from "./mongodb/connect.js";
 
+import register from "./routes/register.js";
+import auth from "./routes/auth.js";
 import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
@@ -13,6 +15,8 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use("/auth", auth);
+app.use("/register", register);
 app.use("/orderData", orderRoutes);
 
 app.get("/", async (req, res) => {
