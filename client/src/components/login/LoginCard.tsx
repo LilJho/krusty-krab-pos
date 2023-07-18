@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface AdminInfoTypes {
   username: string;
@@ -19,15 +20,30 @@ const LoginCard = () => {
     setAdminInfo((prevObj) => ({ ...prevObj, [key]: value }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(adminInfo);
 
-    setAdminInfo({
-      username: "",
-      pwd: "",
-    });
-    navigate("/orders");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth",
+        adminInfo,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        navigate("/orders");
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        alert(error.response.data.message);
+      }
+      if (error.response.status === 401) {
+        alert("Username and Password does not match!");
+      }
+    }
   };
 
   return (
